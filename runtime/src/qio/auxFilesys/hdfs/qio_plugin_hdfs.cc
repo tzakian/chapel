@@ -346,7 +346,11 @@ qioerr hdfs_getcwd(void* file, const char** path_out, void* fs)
 qioerr hdfs_getpath(void* file, const char** string_out, void* fs)
 {
   qioerr err = 0;
-  *string_out = to_hdfs_file(file)->pathnm;
+  if(asprintf(*string_out, "hdfs://%s:%d/%s", to_hdfs_fs(fs)->fs_name,
+           to_hdfs_fs(fs)->fs_port, to_hdfs_file(file)->pathnm) == -1)
+    QIO_GET_CONSTANT_ERROR(err, ENOMEM, "Unable to allocate memory for path");
+
+  //*string_out = to_hdfs_file(file)->pathnm;
   return err;
 }
 
