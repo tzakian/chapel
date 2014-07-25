@@ -651,6 +651,7 @@ proc file.path : string {
   var ret:string;
   ret = this.getPath(err);
   if err then ioerror(err, "in file.path");
+  return ret;
 }
 
 proc file.length():int(64) {
