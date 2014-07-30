@@ -2,6 +2,8 @@
 //
 
 use MPlot;
+/*use MPlotWritef;*/
+/*use ParMPlot;*/
 
 //
 // Dimensions of image file
